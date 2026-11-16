@@ -1,0 +1,10 @@
+.node{width:124px}
+.node.current{width:160px}
+.branch-caption .icon{width:13px;height:13px}
+.job-card .reason>.icon{display:inline-block;vertical-align:middle;width:12px;height:12px;margin-right:4px}
+.tip>.icon{display:inline-block;vertical-align:middle;width:13px;height:13px}
+.detail-panel .detail-main>p{font-size:11px;line-height:1.9;color:var(--muted)}
+.assessment-intro .detail-icon>.icon{width:25px;height:25px}
+.sidebar .profile-small .avatar{flex-shrink:0}
+.sidebar .profile-small>div:last-child{min-width:0}
+.sidebar .profile-small small{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
