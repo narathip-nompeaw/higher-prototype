@@ -16,9 +16,11 @@ const baseJobs=[
 ];
 const skillNames={communication:'การสื่อสาร',creative:'ความคิดสร้างสรรค์',analysis:'การคิดวิเคราะห์',digital:'ทักษะดิจิทัล',team:'การทำงานเป็นทีม'};
 const defaults={version:1,profile:{name:'มินตรา',institution:'มหาวิทยาลัยศรีปทุม',major:'การสื่อสารและสื่อดิจิทัล',hours:8,mode:'ทุกแบบ'},skills:{communication:62,creative:58,analysis:43,digital:48,team:55},assessed:false,answers:[],applications:[],history:[],customJobs:[],saved:[],role:'student'};
-let db=structuredClone(defaults);try{let parsed=JSON.parse(localStorage.getItem('higher-prototype-v1'));if(parsed?.version===1)db={...db,...parsed,profile:{...defaults.profile,...parsed.profile},skills:{...defaults.skills,...parsed.skills}}}catch{}
+const prototypeStorageKey=document.body.dataset?.demoCohort==='university'?'higher-prototype-university-v1':'higher-prototype-v1';
+if(document.body.dataset?.demoCohort==='university')Object.assign(defaults.profile,{name:'ธนกฤต',institution:'มหาวิทยาลัยตัวอย่าง',major:'ระบบสารสนเทศ'});
+let db=structuredClone(defaults);try{let parsed=JSON.parse(localStorage.getItem(prototypeStorageKey));if(parsed?.version===1)db={...db,...parsed,profile:{...defaults.profile,...parsed.profile},skills:{...defaults.skills,...parsed.skills}}}catch{}
 let page=(location.hash.slice(1)||'roadmap');let selected='content',mapView='tree',zoom=.9,filter='all',query='',assessmentStep=0,assessmentStarted=false,feedbackRating=4,menuOpen=false;
-function save(){try{localStorage.setItem('higher-prototype-v1',JSON.stringify(db))}catch{toast('เบราว์เซอร์ไม่อนุญาตให้บันทึก ข้อมูลจะอยู่เฉพาะการเปิดครั้งนี้')}}
+function save(){try{localStorage.setItem(prototypeStorageKey,JSON.stringify(db))}catch{toast('เบราว์เซอร์ไม่อนุญาตให้บันทึก ข้อมูลจะอยู่เฉพาะการเปิดครั้งนี้')}}
 function jobs(){return [...baseJobs,...db.customJobs]}
 function completed(){return db.applications.filter(a=>a.status==='completed')}
 function appFor(id){return db.applications.find(a=>a.jobId===id)}
